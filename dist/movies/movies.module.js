@@ -9,13 +9,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MoviesModule = void 0;
 const common_1 = require("@nestjs/common");
 const movies_controller_1 = require("./movies.controller");
+const movies_service_1 = require("./movies.service");
 let MoviesModule = class MoviesModule {
 };
 MoviesModule = __decorate([
     (0, common_1.Module)({
-        imports: [movies_controller_1.MoviesController],
-        controllers: [],
-        providers: [],
+        controllers: [movies_controller_1.MoviesController],
+        providers: [movies_service_1.MoviesService],
     })
 ], MoviesModule);
 exports.MoviesModule = MoviesModule;
