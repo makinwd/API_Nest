@@ -43,5 +43,40 @@ describe('MoviesService', () => {
         expect(err.message).toEqual('Movie not found');
       }
     });
+
+    describe('Testing function remove', () => {
+      it('Should be remove movie', () => {
+        service.create({
+          title: 'Test movie',
+          genres: ['Test genres'],
+          year: 2000,
+        });
+        const allMovies = service.getAll().length;
+        service.remove(1);
+        const afterRemove = service.getAll().length;
+        expect(afterRemove).toBeLessThan(allMovies);
+      });
+
+      it('Should be returned error 404', () => {
+        try {
+          service.remove(9999);
+        } catch (err) {
+          expect(err).toBeInstanceOf(NotFoundException);
+        }
+      });
+    });
+
+    describe('Testing function create', () => {
+      it('Should be create movie', () => {
+        const beforeCreate = service.getAll().length;
+        service.create({
+          title: 'Test movie',
+          genres: ['Test genres'],
+          year: 2000,
+        });
+        const afterCreate = service.getAll().length;
+        expect(afterCreate).toBeGreaterThan(beforeCreate);
+      });
+    });
   });
 });
